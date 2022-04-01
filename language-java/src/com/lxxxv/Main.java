@@ -1,12 +1,17 @@
 package com.lxxxv;
 
+import java.util.Optional;
 import java.util.function.*;
+import java.lang.Exception;
 
 public class Main
 {
 
     public static void main(String[] args)
     {
+        new CallBackRandom().getStringConsumer(null);
+
+
         //
         // getStringConsumer 내부에서 수행 후 결과를 호출자의 파라미터로 전달
         //

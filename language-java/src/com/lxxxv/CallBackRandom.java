@@ -12,13 +12,13 @@ public class CallBackRandom
     {
         try
         {
-            Optional<Consumer> caller = Optional.of(_caller);
+            Consumer<String> caller = Optional.of(_caller).orElseThrow(NullPointerException::new);
 
             Random rm = new Random();
             int idx = 0;
             while (idx < _maxLoop)
             {
-                _caller.accept(Integer.toString(rm.nextInt()) + "_" + Integer.toString(idx));
+                caller.accept(Integer.toString(rm.nextInt()) + "_" + Integer.toString(idx));
                 idx++;
             }
         }
@@ -29,10 +29,7 @@ public class CallBackRandom
     }
 
     public void getStringConsumer(Consumer<String> _caller) {this.getStringConsumer(MAX_LOOP, _caller);}
-    public void getStringSupplier(Supplier<String> _caller)
-    {
-        this.getStringSupplier(MAX_LOOP, _caller);
-    }
+    public void getStringSupplier(Supplier<String> _caller) {this.getStringSupplier(MAX_LOOP, _caller);}
     public void getStringFunction(Function<String, String> _caller) {this.getStringFunction(MAX_LOOP, _caller);}
     public void getStringOperator(BinaryOperator<String> _caller){this.getStringOperator(MAX_LOOP, _caller);}
 
@@ -40,12 +37,13 @@ public class CallBackRandom
     {
         try
         {
-            Optional<Consumer> caller = Optional.of(_caller);
+            Consumer<String> caller = Optional.of(_caller).orElseThrow(NullPointerException::new);
+
             this.buildString
             (
                 _maxLoop, (Sender)->
                 {
-                    _caller.accept("Consumer "+Sender);
+                    caller.accept("Consumer "+Sender);
                 }
             );
         }
@@ -58,12 +56,13 @@ public class CallBackRandom
     {
         try
         {
-            Optional<Supplier> caller = Optional.of(_caller);
+            Supplier<String> caller = Optional.of(_caller).orElseThrow(NullPointerException::new);
+
             this.buildString
             (
                 _maxLoop, (Sender)->
                 {
-                    String tmp = _caller.get();
+                    String tmp = caller.get();
                 }
             );
         }
@@ -76,12 +75,13 @@ public class CallBackRandom
     {
         try
         {
-            Optional<Function> caller = Optional.of(_caller);
+            Function<String, String> caller = Optional.of(_caller).orElseThrow(NullPointerException::new);
+
             this.buildString
             (
                 _maxLoop, (Sender)->
                 {
-                    String cnv = _caller.apply("Function "+Sender);
+                    String cnv = caller.apply("Function "+Sender);
                     System.out.println(cnv);
                 }
             );
@@ -95,12 +95,13 @@ public class CallBackRandom
     {
         try
         {
-            Optional<BinaryOperator> caller = Optional.of(_caller);
+            BinaryOperator<String> caller = Optional.of(_caller).orElseThrow(NullPointerException::new);
+
             this.buildString
             (
                 _maxLoop, (Sender)->
                 {
-                    String tmp = _caller.apply(Sender, Sender + "aa");
+                    String tmp = caller.apply(Sender, Sender + "aa");
                 }
             );
         }
