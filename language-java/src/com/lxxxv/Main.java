@@ -28,5 +28,20 @@ public class Main
                 return sender + " a";
             }
         );
+
+        new CallBackRandom().getStringOperator
+        (
+            (a, b)->
+            {
+                if (a.equals(b))
+                {
+                    return a;
+                }
+                else
+                {
+                    return b;
+                }
+            }
+        );
     }
 }

@@ -34,6 +34,7 @@ public class CallBackRandom
         this.getStringSupplier(MAX_LOOP, _caller);
     }
     public void getStringFunction(Function<String, String> _caller) {this.getStringFunction(MAX_LOOP, _caller);}
+    public void getStringOperator(BinaryOperator<String> _caller){this.getStringOperator(MAX_LOOP, _caller);}
 
     public void getStringConsumer(int _maxLoop, Consumer<String> _caller)
     {
@@ -82,6 +83,24 @@ public class CallBackRandom
                 {
                     String cnv = _caller.apply("Function "+Sender);
                     System.out.println(cnv);
+                }
+            );
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+    public void getStringOperator(int _maxLoop, BinaryOperator<String> _caller)
+    {
+        try
+        {
+            Optional<BinaryOperator> caller = Optional.of(_caller);
+            this.buildString
+            (
+                _maxLoop, (Sender)->
+                {
+                    String tmp = _caller.apply(Sender, Sender + "aa");
                 }
             );
         }
