@@ -1,13 +1,32 @@
 package com.lxxxv;
 
+import java.util.function.*;
+
 public class Main
 {
 
     public static void main(String[] args)
     {
-        new CallBackRandom().getString
+        //
+        // getStringConsumer 내부에서 수행 후 결과를 호출자의 파라미터로 전달
+        //
+        new CallBackRandom().getStringConsumer
         (
-            (Sender)->System.out.println("value : " + Sender)
+            5, (Sender)->
+            {
+                System.out.println(Sender);
+            }
+        );
+
+        //
+        // getStringFunction 내부에서 수행 할 때 호출자의 파라미터의 값을 참조 받는다.
+        //
+        new CallBackRandom().getStringFunction
+        (
+            (sender)->
+            {
+                return sender + " a";
+            }
         );
     }
 }
